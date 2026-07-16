@@ -27,6 +27,7 @@ export default function Navbar() {
 
   const totalItems = useCartStore((s) => s.totalItems());
   const wishlistCount = useWishlistStore((s) => s.items.length);
+  const isTransparent = !scrolled && !mobileOpen && pathname === "/";
 
   useEffect(() => {
     setMounted(true);
@@ -52,7 +53,7 @@ export default function Navbar() {
         transition={{ duration: 0.6, ease: "easeOut" }}
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
-          scrolled
+          (scrolled || mobileOpen)
             ? "bg-[var(--background)]/95 backdrop-blur-md shadow-sm border-b border-[var(--border)]"
             : "bg-transparent"
         )}
@@ -64,7 +65,10 @@ export default function Navbar() {
                 <span className="text-white font-bold text-sm tracking-wider">FH</span>
               </div>
               <span
-                className="font-serif text-xl lg:text-2xl font-bold tracking-wide text-[var(--foreground)]"
+                className={cn(
+                  "font-serif text-xl lg:text-2xl font-bold tracking-wide transition-colors duration-200",
+                  isTransparent ? "text-white" : "text-[var(--foreground)]"
+                )}
                 style={{ letterSpacing: "0.05em" }}
               >
                 FASHION HUB
@@ -80,7 +84,9 @@ export default function Navbar() {
                     "relative text-sm font-medium tracking-widest uppercase transition-colors duration-200",
                     pathname === link.href
                       ? "text-[var(--accent)]"
-                      : "text-[var(--foreground)] hover:text-[var(--accent)]"
+                      : isTransparent
+                        ? "text-white hover:text-[var(--accent)]"
+                        : "text-[var(--foreground)] hover:text-[var(--accent)]"
                   )}
                 >
                   {link.label}
@@ -95,61 +101,88 @@ export default function Navbar() {
             </div>
 
             <div className="flex items-center gap-3">
-              <button
+              <motion.button
+              whileHover={{ scale: 1.05, y: -5 }}
+              whileTap={{ scale: 0.95, y: -15 }}
                 onClick={() => setSearchOpen(!searchOpen)}
-                className="p-2 rounded-full text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)] transition-all duration-200"
+                className={cn(
+                  "p-2 rounded-full transition-all duration-200",
+                  isTransparent
+                    ? "text-white hover:text-[var(--accent)] hover:bg-white/10"
+                    : "text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)]"
+                )}
                 aria-label="Search"
               >
                 <FiSearch size={20} />
-              </button>
+              </motion.button>
 
               {mounted && (
-                <button
+                <motion.button
+                  whileHover={{ scale: 1.05, y: -5 }}
+                  whileTap={{ scale: 0.95, y: -15 }}
                   onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                  className="p-2 rounded-full text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)] transition-all duration-200"
+                  className={cn(
+                    "p-2 rounded-full transition-all duration-200",
+                    isTransparent
+                      ? "text-white hover:text-[var(--accent)] hover:bg-white/10"
+                      : "text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)]"
+                  )}
                   aria-label="Toggle theme"
                 >
                   {theme === "dark" ? <FiSun size={20} /> : <FiMoon size={20} />}
-                </button>
+                </motion.button>
               )}
 
+              <motion.div
+                whileHover={{ scale: 1.05, y: -5 }}
+                whileTap={{ scale: 0.95, y: -15 }}>
+                <Link
+                  href="/wishlist"
+                  className={cn(
+                    "relative p-2 rounded-full transition-all duration-200 hidden sm:flex",
+                    isTransparent
+                      ? "text-white hover:text-[var(--accent)] hover:bg-white/10"
+                      : "text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)]"
+                  )}
+                  aria-label="Wishlist"
+                >
+                  <FiHeart size={20} />
+                  {wishlistCount > 0 && (
+                    <span className="absolute -top-0.5 -right-0.5 bg-[var(--accent)] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
+                      {wishlistCount}
+                    </span>
+                  )}
+                </Link>
+              </motion.div>
+
               <Link
-                href="/wishlist"
-                className="relative p-2 rounded-full text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)] transition-all duration-200 hidden sm:flex"
-                aria-label="Wishlist"
+                href="/cart"
+                className={cn(
+                  "relative p-2 rounded-full transition-all duration-200",
+                  isTransparent
+                    ? "text-white hover:text-[var(--accent)] hover:bg-white/10"
+                    : "text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)]"
+                )}
+                aria-label="Cart"
               >
-                <FiHeart size={20} />
-                {wishlistCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 bg-[var(--accent)] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center">
-                    {wishlistCount}
+                <FiShoppingBag size={20} />
+                  {mounted && totalItems > 0 && (
+                  <span
+                    className="absolute -top-0.5 -right-0.5 bg-[var(--accent)] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center"
+                  >
+                    {totalItems}
                   </span>
                 )}
               </Link>
 
-              <Link
-                href="/cart"
-                className="relative p-2 rounded-full text-[var(--foreground)] hover:text-[var(--accent)] hover:bg-[var(--muted)] transition-all duration-200"
-                aria-label="Cart"
-              >
-                <FiShoppingBag size={20} />
-                <AnimatePresence>
-                  {totalItems > 0 && (
-                    <motion.span
-                      key="cart-badge"
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      exit={{ scale: 0 }}
-                      className="absolute -top-0.5 -right-0.5 bg-[var(--accent)] text-white text-[10px] font-bold rounded-full w-4 h-4 flex items-center justify-center"
-                    >
-                      {totalItems}
-                    </motion.span>
-                  )}
-                </AnimatePresence>
-              </Link>
-
               <button
                 onClick={() => setMobileOpen(!mobileOpen)}
-                className="md:hidden p-2 rounded-full text-[var(--foreground)] hover:bg-[var(--muted)] transition-all duration-200"
+                className={cn(
+                  "md:hidden p-2 rounded-full transition-all duration-200",
+                  isTransparent
+                    ? "text-white hover:bg-white/10"
+                    : "text-[var(--foreground)] hover:bg-[var(--muted)]"
+                )}
                 aria-label="Menu"
               >
                 {mobileOpen ? <FiX size={20} /> : <FiMenu size={20} />}

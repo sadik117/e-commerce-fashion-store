@@ -1,10 +1,10 @@
-import type { Metadata } from "next";
 import "./globals.css";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import { ThemeProvider } from "next-themes";
+
 import { Toaster } from "sonner";
 import { Inter, Playfair_Display } from "next/font/google";
+import ThemeProvider from "@/components/ui/ThemeProvider";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -16,16 +16,6 @@ const playfair = Playfair_Display({
   variable: "--font-serif",
 });
 
-export const metadata: Metadata = {
-  title: {
-    default: "Fashion Hub – Premium Fashion Store",
-    template: "%s | Fashion Hub",
-  },
-  description:
-    "Discover premium panjabi, kurta, and fashion accessories. Curated South Asian fashion for the modern wardrobe.",
-  keywords: ["fashion", "panjabi", "kurta", "bangladeshi fashion", "ethnic wear", "fashion hub"],
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -36,7 +26,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="dark"
           enableSystem={false}
           disableTransitionOnChange={false}
         >
