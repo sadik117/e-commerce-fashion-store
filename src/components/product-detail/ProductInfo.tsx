@@ -231,6 +231,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
         </button>
       </div>
 
+
       {product.details.length > 0 && (
         <>
           <div className="h-px bg-[var(--border)]" />
