@@ -28,3 +28,24 @@ export interface CartItem {
 export interface WishlistItem {
   product: Product;
 }
+
+export interface ProductCardProps {
+  product: Product;
+  index?: number;
+}
+
+export interface CartStore {
+  items: CartItem[];
+  addItem: (product: Product, size: string, color: string) => void;
+  removeItem: (productId: number, size: string, color: string) => void;
+  updateQuantity: (productId: number, size: string, color: string, quantity: number) => void;
+  clearCart: () => void;
+  totalItems: () => number;
+  totalPrice: () => number;
+}
+
+export interface WishlistStore {
+  items: Product[];
+  toggleWishlist: (product: Product) => void;
+  isWishlisted: (productId: number) => boolean;
+}
