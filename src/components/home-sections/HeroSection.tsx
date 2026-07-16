@@ -78,11 +78,11 @@ export default function HeroSection() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 0.85 }}
-            className="flex flex-wrap items-center gap-6 sm:gap-12 mt-6 sm:mt-8 mb-6"
+            className="flex flex-wrap items-center gap-6 sm:gap-12 mt-4 sm:mt-6 mb-6"
           >
             {[
               { label: "Products", value: "12+" },
-              { label: "Categories", value: "5" },
+              { label: "Categories", value: "5+" },
               { label: "Happy Customers", value: "2K+" },
             ].map((stat) => (
               <div key={stat.label} className="text-center">
