@@ -1,13 +1,13 @@
 <div align="center">
 
 <h1>
-  <img src="https://raw.githubusercontent.com/sadik117/e-commerce-fashion-store/main/public/favicon.ico" width="32" alt="Fashion Hub logo" />
+  <img src="https://raw.githubusercontent.com/sadik117/e-commerce-fashion-store/main/src/app/favicon.ico" width="32" alt="Fashion Hub logo" />
   &nbsp;Fashion Hub
 </h1>
 
 <p>
   <strong>A premium South Asian fashion e-commerce storefront</strong><br/>
-  Built with Next.js 16 · Tailwind CSS v4 · Framer Motion · Zustand
+  Built with TypeScript 5 · Next.js 16 · Tailwind CSS v4 · Framer Motion · Zustand
 </p>
 
 <p>
@@ -19,9 +19,6 @@
     <img alt="GitHub" src="https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github&logoColor=white" />
   </a>
   &nbsp;
-  <img alt="Next.js" src="https://img.shields.io/badge/Next.js-16-000000?style=for-the-badge&logo=next.js&logoColor=white" />
-  &nbsp;
-  <img alt="TypeScript" src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white" />
 </p>
 
 <br/>
@@ -42,11 +39,11 @@
 
 | Page | URL |
 |---|---|
-| 🏠 Homepage | [fashion-lmiwwvoik-sadik-sourovs-projects.vercel.app](https://fashion-lmiwwvoik-sadik-sourovs-projects.vercel.app) |
-| 🛍️ Products | [.../products](https://fashion-lmiwwvoik-sadik-sourovs-projects.vercel.app/products) |
-| 🛒 Cart | [.../cart](https://fashion-lmiwwvoik-sadik-sourovs-projects.vercel.app/cart) |
-| 💖 Wishlist | [.../wishlist](https://fashion-lmiwwvoik-sadik-sourovs-projects.vercel.app/wishlist) |
-| ℹ️ About | [.../about](https://fashion-lmiwwvoik-sadik-sourovs-projects.vercel.app/about) |
+| 🏠 Homepage | [fashion-hub-three-theta.vercel.app](https://fashion-hub-three-theta.vercel.app) |
+| 🛍️ Products | [.../products](https://fashion-hub-three-theta.vercel.app/products) |
+| 🛒 Cart | [.../cart](https://fashion-hub-three-theta.vercel.app/cart) |
+| 💖 Wishlist | [.../wishlist](https://fashion-hub-three-theta.vercel.app/wishlist) |
+| ℹ️ About | [.../about](https://fashion-hub-three-theta.vercel.app/about) |
 
 ---
 
